@@ -1,0 +1,19 @@
+{
+    "name": "a2design/aiml",
+    "description": "AIML",
+    "authors": [
+        {
+            "name": "Vladislav Bezverkhiy",
+            "email": "bezverhiy@a2design.biz"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "psr-4": {
+        "A2Design\\AIML\\": "src/"
+    },
+    "require": {}
+}
