@@ -36,6 +36,7 @@ class FileAdapter extends Adapter {
     {
         $content = file_get_contents($aimlContent);
         $this->content = new SimpleXMLElement($content);
+        $this->parseAIML($this->content, '');
     }
 
 
@@ -72,7 +73,6 @@ class FileAdapter extends Adapter {
      */
     protected function _searchPattern($pattern)
     {
-        $this->parseAIML($this->content, $pattern);
         $rawAnswer = $this->aimlParser->getAnswer($pattern);
         return $rawAnswer;
     }
