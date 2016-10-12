@@ -8,12 +8,26 @@ abstract class BaseCollection  implements ArrayAccess, IteratorAggregate {
     protected $items = [];
     protected $index = [];
 
+
+    /**
+     * Sets collection element to provided offset
+     *
+     * @param mixed $offset offset of element
+     * @param mixed $value  element value
+     */
     public function offsetSet($offset, $value)
     {
         $hash = md5($offset);
         $this->items[$hash] = $value;
     }
 
+    /**
+     * Checks that collection has elemnt with provided offset
+     *
+     * @param mixed $offset offset for check
+     *
+     * @return boolean
+     */
     public function offsetExists($offset)
     {
         $hash = md5($offset);
@@ -31,6 +45,12 @@ abstract class BaseCollection  implements ArrayAccess, IteratorAggregate {
         return !empty($element);
     }
 
+
+    /**
+     * Unsets element by provided offset
+     *
+     * @param mixed $offset offset for unset
+     */
     public function offsetUnset($offset) {
         $hash = md5($offset);
         unset($this->items[$hash]);
@@ -38,6 +58,12 @@ abstract class BaseCollection  implements ArrayAccess, IteratorAggregate {
 
     }
 
+
+    /**
+     * Returns element from provided offset
+     *
+     * @param mixed $offset element offset
+     */
     public function offsetGet($offset) {
         $hash = md5($offset);
         if (isset($this->items[$hash])) {
@@ -53,6 +79,12 @@ abstract class BaseCollection  implements ArrayAccess, IteratorAggregate {
         return $this->findElement($offset);
     }
 
+
+    /**
+     * Returns iterator object
+     *
+     * @return ArrayIterator iterator with collection elements
+     */
     public function getIterator()
     {
         return new ArrayIterator($this->items);
