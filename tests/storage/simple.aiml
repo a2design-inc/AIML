@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- Last modified May 24, 2011 -->
+<!--  -->
+<!-- Copyright &copy; 2011 ALICE A.I. Foundation, Inc. -->
+<!--  -->
+<!-- This program is free software; you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation -->
+<!--  -->
+    <category>
+        <pattern>hi bot</pattern>
+        <template>Hello, my name is <bot name="name" /></template>
+    </category>
+    <category>
+        <pattern>hello</pattern>
+        <template>
+            hello
+        </template>
+    </category>
+    <category>
+        <pattern>hello *</pattern>
+        <template>
+            hello <star index="1"/>
+        </template>
+    </category>
+    <category>
+        <pattern>* eddy</pattern>
+        <template>
+            <star index="1"/> eddy
+        </template>
+    </category>
+    <category>
+        <pattern>* *</pattern>
+        <template>
+            <star index="1"/> <star index="1"/>
+        </template>
+    </category>
+    <category>
+        <pattern>hello dear *</pattern>
+        <template>
+            hello <star index="1"/>
+        </template>
+    </category>
+    <category>
+        <pattern>hello * eddy</pattern>
+        <template>
+            <star index="1"/> eddy
+        </template>
+    </category>
+    <category>
+        <pattern>* dear eddy</pattern>
+        <template>
+            <star index="1"/> <star index="1"/>
+        </template>
+    </category>
+    <category>
+        <pattern>hello * *</pattern>
+        <template>
+            <star index="1"/> <star index="1"/>
+        </template>
+    </category>
+    <category>
+        <pattern>* dear *</pattern>
+        <template>
+            <star index="1"/> <star index="1"/>
+        </template>
+    </category>
+    <category>
+        <pattern>* * eddy</pattern>
+        <template>
+            <star index="1"/> <star index="1"/>
+        </template>
+    </category>
+    <category>
+        <pattern>* * *</pattern>
+        <template>
+            <star index="1"/> <star index="1"/>
+        </template>
+    </category>
+    <category>
+        <pattern>hello, i'm *</pattern>
+        <template>
+            hello <star index="1" />, are you fine?
+        </template>
+    </category>
+    <category>
+        <pattern>yes</pattern>
+        <that>hello <star index="1" />, are you fine?</that>
+        <template>
+            i'm too
+        </template>
+    </category>
+    <category>
+        <pattern>no</pattern>
+        <that>hello <star index="1" />, are you fine?</that>
+        <template>why? are you sad?</template>
+    </category>
+    <category>
+        <pattern>yes</pattern>
+        <that>why? are you sad?</that>
+        <template>do you have a problems?</template>
+    </category>
+</aiml>

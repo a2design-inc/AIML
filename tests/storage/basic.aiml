@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- Last modified May 24, 2011 -->
+<!--  -->
+<!-- Copyright &copy; 2011 ALICE A.I. Foundation, Inc. -->
+<!--  -->
+<!-- This program is free software; you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation -->
+<!--  -->
+    <category>
+        <pattern>hi bot</pattern>
+        <template>Hello, my name is <bot name="name"/></template>
+    </category>
+</aiml>
