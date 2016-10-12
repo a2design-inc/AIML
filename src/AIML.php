@@ -66,7 +66,7 @@ class AIML {
      */
     public function addDict($dictionary)
     {
-        $this->_checkDictionary($dictionary);
+        return $this->_checkDictionary($dictionary);
     }
 
 
@@ -85,12 +85,7 @@ class AIML {
             return '...';
         }
 
-        $answer = $bestMatch
-            ->replaceChatVars($this->chatInfo)
-            ->replaceUserVars($this->userInfo)
-            ->replaceStars($question);
-
-        return $answer->getContent();
+        return $bestMatch->getContent($question, $this->getChatData(), $this->getUserData());
     }
 
 
@@ -131,5 +126,6 @@ class AIML {
     {
         $this->dictionaries[$dictionary] = $this->adapterFactory
             ->getAdapter($dictionary);
+        return $this->dictionaries[$dictionary];
     }
 }
