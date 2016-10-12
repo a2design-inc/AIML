@@ -2,13 +2,22 @@
 
 namespace A2Design\AIML\Utils\Contracts;
 
-use ArrayAccess, ArrayIterator, IteratorAggregate;
+use ArrayAccess, ArrayIterator, IteratorAggregate, Countable;
 
-abstract class BaseCollection  implements ArrayAccess, IteratorAggregate {
+abstract class BaseCollection  implements ArrayAccess, IteratorAggregate, Countable {
     protected $items = [];
     protected $index = [];
 
 
+    /**
+     * Returns count of collection elements
+     * 
+     * @return integer
+     */
+    public function count()
+    {
+        return count($this->items);
+    }
     /**
      * Sets collection element to provided offset
      *
