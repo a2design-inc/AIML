@@ -4,14 +4,17 @@ namespace A2Design\AIML;
 
 use SimpleXMLElement;
 use A2Design\AIML\Utils\Collection;
+use A2Design\AIML\AIML;
+use A2Design\AIML\Contracts\BaseAnswer;
 
-class Answer {
+class Answer extends BaseAnswer {
 
     protected $_rawAnswer = null;
     protected $answer = "";
     protected $pattern = "";
     protected $patternTokens = [];
     protected $conversationNodes = null;
+    protected $chat = null;
 
     public function __construct(SimpleXMLElement $rawAnswer, $pattern)
     {
@@ -21,51 +24,6 @@ class Answer {
         $this->patternTokens = explode(' ', $pattern);
         $this->conversationNodes = new Collection();
     }
-
-
-    /**
-     * Adds conversation node to answer
-     *
-     * @param Answer $answer conversation node linked by <that>
-     */
-    public function addConverstionNode(Answer $answer)
-    {
-        $this->conversationNodes[$answer->getPattern()] = $answer;
-    }
-
-
-    /**
-     * Returns conversation node by provided question
-     *
-     * @param  string $question conversation pattern
-     * @return mixed
-     */
-    public function getConversation($question)
-    {
-        return $this->conversationNodes[$question];
-    }
-
-    /**
-     * Checks that answer has any conversation nodes
-     *
-     * @return boolean
-     */
-    public function hasConversation()
-    {
-        return count($this->conversationNodes) > 0;
-    }
-
-
-    /**
-     * Returns answer matching pattern
-     *
-     * @return string
-     */
-    public function getPattern()
-    {
-        return $this->pattern;
-    }
-
 
     /**
      * Check that AIML pattern match provided question and calculates
@@ -114,39 +72,15 @@ class Answer {
      *
      * @return string
      */
-    public function getContent()
+    public function getContent($question, $chatVars = [], $userVars = [])
     {
-        return $this->answer;
+        $this->replaceChatVars($chatVars);
+        $this->replaceUserVars($userVars);
+        $this->replaceStars($question);
+        $answer = $this->convertBufferToString();
+        $this->clearBuffers();
+        return $answer;
     }
-
-
-    /**
-     * Replaces <get /> tags by provided user info
-     *
-     * @param  array $vars associative array with user variables
-     *
-     * @return Answer
-     */
-    public function replaceUserVars($vars)
-    {
-        $this->_replaceVars('get', $vars);
-        return $this;
-    }
-
-
-    /**
-    * Replaces <bot /> tags by provided user info
-    *
-    * @param  array $vars associative array with chat variables
-    *
-    * @return Answer
-     */
-    public function replaceChatVars($vars)
-    {
-        $this->_replaceVars('bot', $vars);
-        return $this;
-    }
-
 
     /**
     * Replaces <star /> tags by variables provied in question
@@ -158,6 +92,7 @@ class Answer {
     public function replaceStars($question)
     {
         $questionPatterns = explode(' ', $question);
+        $rawAnswer = $this->getXMLBuffer();
 
         $stars = [];
 
@@ -167,8 +102,8 @@ class Answer {
             }
         }
 
-        $rawXML = $this->_rawAnswer->asXML();
-        $collection = $this->_rawAnswer->children();
+        $rawXML = $rawAnswer->asXML();
+        $collection = $rawAnswer->children();
 
         foreach ($collection as $key => $node) {
             if ($node->getName() !== 'star') {
@@ -187,41 +122,7 @@ class Answer {
             $nodeRawXML = $node->asXML();
             $rawXML = str_replace($nodeRawXML, $stars[$starIndex], $rawXML);
         }
-        return trim(strval(new SimpleXMLElement($rawXML)));
-    }
-
-
-    /**
-     * Replaces provided tags by provided data
-     *
-     * @param  string $selector AIML elemnt name
-     * @param  array  $vars     associative array of data
-     * 
-     * @return string
-     */
-    protected function _replaceVars($selector, $vars)
-    {
-        $collection = $this->_rawAnswer->children();
-        $rawXML = $this->_rawAnswer->asXML();
-
-        foreach ($collection as $node) {
-            if ($node->getName() !== $selector) {
-                continue;
-            }
-
-            foreach ($node->attributes() as $attribute => $value) {
-                if ($attribute !== 'name') {
-                    continue;
-                }
-                if (empty($vars[strval($value)])) {
-                    continue;
-                }
-
-                $nodeRawXML = $node->asXML();
-                $rawXML = str_replace($nodeRawXML, $vars[strval($value)], $rawXML);
-            }
-        }
-        $this->answer = strval(new SimpleXMLElement($rawXML));
-        return $this->answer;
+        $this->rawXMLBuffer = new SimpleXMLElement($rawXML);
+        return trim(strval($this->rawXMLBuffer));
     }
 }
