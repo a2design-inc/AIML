@@ -14,11 +14,13 @@ abstract class Adapter implements Parsable, Searchable {
     abstract public function getAIML();
     abstract public function setAIML($aimlContent);
 
+    abstract public function checkExists($aiml);
+
     abstract protected function _searchCategory($question);
     abstract protected function _searchPattern($pattern);
     abstract protected function _searchAnswer($question);
 
-    public function parseAIML($aimlContent = null, $question)
+    public function parseAIML($aimlContent = null)
     {
         if (empty($aimlContent)) {
             $aimlContent = $this->content;
