@@ -1,6 +1,6 @@
 {
     "name": "a2design/aiml",
-    "description": "AIML",
+    "description": "AIML parser",
     "authors": [
         {
             "name": "Vladislav Bezverkhiy",
