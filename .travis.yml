@@ -22,4 +22,4 @@ before:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev
 
-script: phpunit --bootstrap ./vendor/autoload.php ./tests/
+script: ./vendor/bin/phpunit --bootstrap ./vendor/autoload.php ./tests/
