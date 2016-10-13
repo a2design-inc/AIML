@@ -23,4 +23,4 @@ before:
   - php composer.phar install --dev
   - php composer.phat require global phpunit/phpunit
 
-script: ./vendor/bin/phpunit --bootstrap ./vendor/autoload.php ./tests/
+script: phpunit --bootstrap ./vendor/autoload.php ./tests/
