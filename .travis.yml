@@ -18,9 +18,8 @@ php:
   # aliased to a recent 7.x version
   - 7.0
 
-before:
+before_script:
   - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev
-  - php composer.phat require global phpunit/phpunit
+  - php composer.phar install
 
 script: phpunit --bootstrap ./vendor/autoload.php ./tests/
