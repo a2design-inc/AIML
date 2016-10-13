@@ -21,6 +21,6 @@ php:
 before:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev
-  - composer require global phpunit/phpunit
+  - php composer.phat require global phpunit/phpunit
 
 script: ./vendor/bin/phpunit --bootstrap ./vendor/autoload.php ./tests/
