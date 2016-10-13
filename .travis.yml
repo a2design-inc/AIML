@@ -19,7 +19,6 @@ php:
   - 7.0
 
 before_script:
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install
+  - composer install
 
 script: phpunit --bootstrap ./vendor/autoload.php ./tests/
