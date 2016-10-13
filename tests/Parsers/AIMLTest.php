@@ -1,9 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use A2Design\AIML\AIML;
 
-class AIMLTest extends TestCase {
+class AIMLTest extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {

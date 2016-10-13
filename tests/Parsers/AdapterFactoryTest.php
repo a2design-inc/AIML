@@ -1,9 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use A2Design\AIML\AdapterFactory;
 
-class AdapterFactoryTest extends TestCase {
+class AdapterFactoryTest extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {

@@ -1,10 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
-
 use A2Design\AIML\Parsers\AIMLParser;
 
-class AIMLParserTest extends TestCase {
+class AIMLParserTest extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
