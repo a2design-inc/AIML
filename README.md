@@ -1,5 +1,11 @@
 # AIML parser
 
+[![Build Status](https://travis-ci.org/a2design-inc/AIML.svg?branch=master)](https://travis-ci.org/a2design-inc/AIML)
+
+## Requirements
+
+* PHP: ≥ 5.4
+
 ## Instalation
 
 ```
