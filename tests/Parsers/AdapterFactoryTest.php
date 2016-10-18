@@ -46,12 +46,12 @@ class AdapterFactoryTest extends PHPUnit_Framework_TestCase {
      */
     public function testWrongInheritance()
     {
-        AdapterFactort::registerAdapter('someType', WrongClass::class);
+        AdapterFactory::registerAdapter('someType', '\A2Design\AIML\Tests\AdapterFactory\WrongClass');
     }
 
     public function testProperAdapter()
     {
-        AdapterFactory::registerAdapter('properType', ProperAdapterClass::class);
+        AdapterFactory::registerAdapter('properType', '\A2Design\AIML\Tests\AdapterFactory\ProperAdapterClass');
         $adapter = $this->factory->getAdapter('test', 'properType');
         $this->assertNotNull($adapter);
     }
