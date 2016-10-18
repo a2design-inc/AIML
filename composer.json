@@ -15,6 +15,12 @@
     "psr-4": {
         "A2Design\\AIML\\": "src/"
     },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ],
+        "psr-4": { "A2Design\\AIML\\Tests\\": "tests/" }
+    },
     "require": {
         "php": ">=5.4"
     },
