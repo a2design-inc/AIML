@@ -35,7 +35,7 @@ class AdapterFactory {
             throw new AdapterClassNotFoundException;
         }
 
-        if (!is_subclass_of($class, Adapter::class)) {
+        if (!is_subclass_of($class, '\A2Design\AIML\Contracts\Adapter')) {
             throw new AdapterWrongInheritanceException;
         }
 
