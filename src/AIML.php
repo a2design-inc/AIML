@@ -63,10 +63,13 @@ class AIML {
      * Add dictionary to chat object
      *
      * @param string $dictionary
+     * @param string $type
+     *
+     * @return \A2Design\AIML\Contracts\Adapter
      */
-    public function addDict($dictionary)
+    public function addDict($dictionary, $type = 'file')
     {
-        return $this->_checkDictionary($dictionary);
+        return $this->_checkDictionary($dictionary, $type);
     }
 
 
@@ -122,10 +125,10 @@ class AIML {
      *
      * @return void
      */
-    protected function _checkDictionary($dictionary)
+    protected function _checkDictionary($dictionary, $type = 'file')
     {
         $this->dictionaries[$dictionary] = $this->adapterFactory
-            ->getAdapter($dictionary);
+            ->getAdapter($dictionary, $type);
         return $this->dictionaries[$dictionary];
     }
 }
