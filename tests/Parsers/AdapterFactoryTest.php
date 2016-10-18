@@ -2,6 +2,7 @@
 
 use A2Design\AIML\AdapterFactory;
 use A2Design\AIML\Tests\AdapterFactory\WrongClass;
+use A2Design\AIML\Tests\AdapterFactory\ProperAdapterClass;
 
 class AdapterFactoryTest extends PHPUnit_Framework_TestCase {
 
@@ -36,7 +37,7 @@ class AdapterFactoryTest extends PHPUnit_Framework_TestCase {
      */
     public function testClassNotFound()
     {
-        $this->factory->registerAdapter('someType', 'someClass');
+        AdapterFactory::registerAdapter('someType', 'someClass');
     }
 
     /**
@@ -45,6 +46,13 @@ class AdapterFactoryTest extends PHPUnit_Framework_TestCase {
      */
     public function testWrongInheritance()
     {
-        $this->factory->registerAdapter('someType', WrongClass::class);
+        AdapterFactort::registerAdapter('someType', WrongClass::class);
+    }
+
+    public function testProperAdapter()
+    {
+        AdapterFactory::registerAdapter('properType', ProperAdapterClass::class);
+        $adapter = $this->factory->getAdapter('test', 'properType');
+        $this->assertNotNull($adapter);
     }
 }
