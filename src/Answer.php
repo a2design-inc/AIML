@@ -97,7 +97,7 @@ class Answer extends BaseAnswer {
         $stars = [];
 
         foreach ($this->patternTokens as $key => $token) {
-            if ($token === '*') {
+            if ($token === '*' && !empty($questionPatterns[$key])) {
                 $stars[] = $questionPatterns[$key];
             }
         }
@@ -120,7 +120,9 @@ class Answer extends BaseAnswer {
             }
 
             $nodeRawXML = $node->asXML();
-            $rawXML = str_replace($nodeRawXML, $stars[$starIndex], $rawXML);
+            if (!empty($stars[$starIndex])) {
+                $rawXML = str_replace($nodeRawXML, $stars[$starIndex], $rawXML);                
+            }
         }
         $this->rawXMLBuffer = new SimpleXMLElement($rawXML);
         return trim(strval($this->rawXMLBuffer));
