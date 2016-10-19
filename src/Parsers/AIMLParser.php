@@ -41,8 +41,7 @@ class AIMLParser {
             $pattern = trim(strval($category->pattern));
             $hash = md5($pattern);
             if ($category->hasSrai()) {
-                $sraiHash = trim(strval($category->srai));
-                $this->linksTree[$hash] = $sraiHash;
+                $this->addSraiLink($category, $hash);
                 continue;
             }
 
@@ -91,15 +90,43 @@ class AIMLParser {
 
         $hash = md5($question);
 
-        while (!empty($this->linksTree[$hash])) {
-            $hash = $this->linksTree[$hash];
-        }
+        $hash = $this->searchInLinks($hash);
 
         if (empty($this->patterns[$hash])) {
             return null;
         }
 
         return $this->logAnswer($this->patterns[$hash]);
+    }
+
+
+    /**
+     * Checks that hash in linksTree index and replaces it to last match
+     *
+     * @param  string $hash hash for search in linksTree
+     * @return string
+     */
+    protected function searchInLinks($hash)
+    {
+        while (!empty($this->linksTree[$hash])) {
+            $hash = $this->linksTree[$hash];
+        }
+
+        return $hash;
+    }
+
+    /**
+     * Creates srai link in links index
+     *
+     * @param Category $category category with srai node
+     * @param string   $hash     hash of category pattern
+     *
+     * @return void
+     */
+    protected function addSraiLink($category, $hash)
+    {
+        $sraiHash = trim(strval($category->srai));
+        $this->linksTree[$hash] = $sraiHash;
     }
 
     /**
@@ -137,7 +164,7 @@ class AIMLParser {
      * Updates lastAnwer property
      *
      * @param  Answer $answer last founded answer
-     * 
+     *
      * @return Answer
      */
     protected function logAnswer($answer)
