@@ -95,7 +95,7 @@ class AIML {
     /**
      * Search answer in attached dictionaries
      *
-     * @param  satring $question AIML question pattern
+     * @param  string $question AIML question pattern
      *
      * @return Answer
      */
