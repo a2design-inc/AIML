@@ -24,7 +24,7 @@ class Category extends SimpleXMLElement {
      */
     public function hasSrai()
     {
-        return !empty($this->srai);
+        return !empty($this->template->srai);
     }
 
     /**

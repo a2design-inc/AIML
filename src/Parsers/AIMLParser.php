@@ -125,7 +125,7 @@ class AIMLParser {
      */
     protected function addSraiLink($category, $hash)
     {
-        $sraiHash = trim(strval($category->srai));
+        $sraiHash = trim(strval($category->template->srai));
         $this->linksTree[$hash] = $sraiHash;
     }
 
